@@ -1,3 +1,11 @@
+/*Cree un programa utilizando listas enlazadas con puntero a cabeza y cola que contenga las
+siguientes funciones:
+- Eliminar todos los nodos con un valor dado por el usuario.
+- Diseña una función que devuelva un “corte” de la lista. Se recibirán dos índices i y j y se
+devolverá una nueva lista con punteros a cabeza y cola con una copia de los nodos que
+van del que ocupa la posición i al que ocupa la posición j − 1, ambos incluidos. La lista
+devuelta tendrá punteros a cabeza y cola.*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
