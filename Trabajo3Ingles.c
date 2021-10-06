@@ -22,9 +22,9 @@ typedef struct struct_node
 // esta estructura es solo para un handler de la lista
 typedef struct
 {
-	node *head;
-	node *tail;
-	int  longitude;
+	node *cabeza;
+	node *cola;
+	int  longitud;
 
 } st_lista;
 
@@ -40,8 +40,8 @@ int main (void)
 
 	st_lista list;
 
-	list.head = list.tail = NULL;
-	list.longitude = 0; // no estabas inicializando (!)
+	list.cabeza = list.cola = NULL;
+	list.longitud = 0; // no estabas inicializando (!)
 
 	do
 	{
@@ -83,7 +83,7 @@ void borrar_nodo (node* node)
 
 int contar (st_lista* list)
 {
-	return list->longitude;
+	return list->longitud;
 }
 
 void ingresar_cabeza (st_lista *list)
@@ -96,17 +96,17 @@ void ingresar_cabeza (st_lista *list)
 		scanf("%d", &nuevo_item->num);
 		nuevo_item->next = NULL;
 	}
-	if (! list->head)
+	if (! list->cabeza)
 	{
-		list->head = list->tail = nuevo_item;
+		list->cabeza = list->cola = nuevo_item;
 	}
 	else
 	{
-		nuevo_item->next = list->head;
-		list->head = nuevo_item;
+		nuevo_item->next = list->cabeza;
+		list->cabeza = nuevo_item;
 	}
 
-	list->longitude++;
+	list->longitud++;
 }
 
 void ingresar_cola (st_lista *list)
@@ -119,24 +119,24 @@ void ingresar_cola (st_lista *list)
 		scanf("%d", &nuevo_item->num);
 		nuevo_item->next = NULL;
 	}
-	if (! list->head)
+	if (! list->cabeza)
 	{
-		list->head = list->tail = nuevo_item;
+		list->cabeza = list->cola = nuevo_item;
 	}
 	else
 	{
-		list->tail->next = nuevo_item;
-		list->tail = nuevo_item;
+		list->cola->next = nuevo_item;
+		list->cola = nuevo_item;
 	}
 
-	list->longitude++;
+	list->longitud++;
 }
 
 void mostrar_lista (st_lista list)
 {
 	node *temp;
 
-	for ( temp = list.head; temp; temp = temp->next)
+	for ( temp = list.cabeza; temp; temp = temp->next)
 	{
 		printf("%d\t", temp->num);
 	}
@@ -144,20 +144,20 @@ void mostrar_lista (st_lista list)
 
 void borrar_item_por_numero(st_lista *list, int n)
 {
-	if (list->head)
+	if (list->cabeza)
 	{
 		// nadie va a borrar el elemento 0, lo normal
 		// es pensarlo que el elemento 1 es el 1ro
 		if(n == 1)
 		{
-			node *temp1 = list->head;
-			list->head = list->head->next;
+			node *temp1 = list->cabeza;
+			list->cabeza = list->cabeza->next;
 			borrar_nodo (temp1);
 		}
 		// n hasta la longitud de la lista, sino no podés borrar el último
-		else if (n <= list->longitude)
+		else if (n <= list->longitud)
 		{
-			node *temp2 = list->head;
+			node *temp2 = list->cabeza;
 
 			// el 'while' implementado acá era un 'for'
 			// y debía ir desde 1 a (n-1), o un intervalo equivalente
@@ -168,7 +168,7 @@ void borrar_item_por_numero(st_lista *list, int n)
 			node *deleteItem = temp2->next;
 			temp2->next = deleteItem->next;
 			borrar_nodo (deleteItem);
-			list->longitude--;
+			list->longitud--;
 		}
 	}
 }
